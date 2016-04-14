@@ -12,7 +12,7 @@ def not_found(error=None):
         'status': 404,
         'message': 'Not Found ' + request.url
     }
-    resp = jsonify(message)
+    resp = json.dumps(message)
     return resp
 
 @app.route('/')
@@ -71,12 +71,10 @@ def checkData(data):
     return category_counter
 
 if __name__ == '__main__':
-    host = "127.0.0.1"
+    host = "10.151.34.154"
     location = '../task/'
 
     if len(sys.argv) > 1:
-        host = sys.argv[1]
-    if len(sys.argv) > 2:
-        location = sys.argv[2]
+        location = sys.argv[1]
     set_data(location)
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
